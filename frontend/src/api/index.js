@@ -1,0 +1,23 @@
+import axios from 'axios';
+const api = axios.create({ baseURL: '/api' });
+
+export const healthCheck     = ()      => api.get('/health');
+export const getModels       = ()      => api.get('/models');
+export const getCategories   = ()      => api.get('/categories');
+export const setKeys         = (t)     => api.post('/keys', { keys_text: t });
+export const getKeysStatus   = ()      => api.get('/keys/status');
+export const setModel        = (m)     => api.post('/model', { model: m });
+export const setPlatforms    = (p)     => api.post('/platforms', { platforms: p });
+export const setKeywordCount = (c)     => api.post('/keyword-count', { count: c });
+export const uploadFiles     = (fd)    => api.post('/upload', fd);
+export const getQueueStatus  = ()      => api.get('/queue/status');
+export const getQueueJobs    = ()      => api.get('/queue/jobs');
+export const startQueue      = ()      => api.post('/queue/start');
+export const pauseQueue      = ()      => api.post('/queue/pause');
+export const stopQueue       = ()      => api.post('/queue/stop');
+export const resetQueue      = ()      => api.post('/queue/reset');
+export const retryFailed     = (ids)   => api.post('/queue/retry', { job_ids: ids ?? null });
+export const updateJob       = (id, d) => api.patch(`/queue/jobs/${id}`, d);
+export const deleteJob       = (id)    => api.delete(`/queue/jobs/${id}`);
+export const deleteJobs      = (ids)   => api.delete('/queue/jobs', { data: ids });
+export default api;

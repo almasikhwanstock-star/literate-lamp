@@ -1,0 +1,121 @@
+# Shutterstock AI Metadata Generator
+
+Auto-generate Shutterstock metadata (description, keywords, categories) using Google Gemini AI.
+
+## Features
+- 🖼️ Image & video support
+- 🤖 Multiple Gemini models (2.5 Pro, 2.5 Flash, 2.5 Flash Lite, 2.0 Flash, 2.0 Flash Lite)
+- 🔑 Multi API key with auto-rolling on rate limit
+- ⏯️ Start / Pause / Stop queue controls
+- 📋 Export CSV for Shutterstock bulk upload
+- 🎬 FFmpeg-based video frame extraction
+
+---
+
+## Requirements
+
+- Python 3.10+
+- Node.js 18+
+- ffmpeg (for video support)
+
+### Install ffmpeg
+
+**Windows:**
+```
+winget install ffmpeg
+```
+or download from https://ffmpeg.org/download.html and add to PATH
+
+**macOS:**
+```
+brew install ffmpeg
+```
+
+**Ubuntu/Debian:**
+```
+sudo apt install ffmpeg
+```
+
+---
+
+## Setup & Run
+
+### 1. Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
+
+Backend runs at: http://localhost:8000
+
+### 2. Frontend (new terminal)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs at: http://localhost:5173
+
+---
+
+## Usage
+
+1. Open http://localhost:5173
+2. Click **API KEYS** → paste your Gemini API keys (one per line) → **SAVE KEYS**
+3. Select a **Gemini model** from the dropdown
+4. Drag & drop images/videos onto the drop zone
+5. Click **START** to begin analysis
+6. Edit description/keywords/categories if needed
+7. Click **EXPORT CSV** to download for Shutterstock
+
+---
+
+## API Key Rolling
+
+When a key hits rate limit (429), the backend automatically:
+1. Marks that key as `rate_limited`
+2. Switches to the next available key
+3. Auto-resets the key after ~65 seconds
+4. Shows live key status in the UI (green/yellow/red)
+
+---
+
+## Project Structure
+
+```
+shutterstock-ai/
+├── backend/
+│   ├── main.py              # FastAPI app + routes
+│   ├── gemini_service.py    # Gemini API + key rolling
+│   ├── video_service.py     # FFmpeg frame extraction
+│   ├── queue_manager.py     # Job queue with start/pause/stop
+│   ├── config.py            # Models + categories config
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── api/index.js     # Axios API calls
+│   │   └── components/
+│   │       ├── ApiKeyManager.jsx
+│   │       ├── ModelSelector.jsx
+│   │       ├── QueueControls.jsx
+│   │       └── FileRow.jsx
+│   ├── package.json
+│   └── vite.config.js
+└── README.md
+```
+
+---
+
+## Gemini API Keys
+
+Get free keys at: https://aistudio.google.com/app/apikey
+
+Free tier limits:
+- 2.5 Flash: 10 req/min, 500 req/day
+- 2.0 Flash: 15 req/min, 1500 req/day
+- 2.5 Flash Lite: 30 req/min (fastest for bulk)

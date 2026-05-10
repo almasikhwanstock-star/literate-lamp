@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Sparkles, Download, UploadCloud, Sun, Moon, Wifi, WifiOff, ServerCrash, ChevronDown } from 'lucide-react';
+import { Gem, Download, UploadCloud, Sun, Moon, Wifi, WifiOff, ServerCrash, ChevronDown } from 'lucide-react';
 import {
   healthCheck, getModels, getKeysStatus, uploadFiles,
   getQueueStatus, getQueueJobs, startQueue, pauseQueue,
@@ -198,11 +198,11 @@ export default function App() {
         {/* Logo */}
         <div style={{ display:'flex', alignItems:'center', gap:10 }}>
           <div style={{ width:30, height:30, background:'var(--accent)', borderRadius:'var(--radius)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-            <Sparkles size={16} color="white"/>
+            <Gem size={16} color="white"/>
           </div>
           <div>
             <div style={{ fontSize:14, fontWeight:700, letterSpacing:'-0.3px', lineHeight:1.2 }}>
-              Litterate<span style={{ color:'var(--accent)' }}>Lamp</span>
+              Litterate<span style={{ color:'var(--accent)' }}> Lamp</span>
             </div>
             <div style={{ fontSize:10, color:'var(--text-tertiary)', textTransform:'uppercase', letterSpacing:'0.05em', lineHeight:1.2 }}>Metadata Generator</div>
           </div>

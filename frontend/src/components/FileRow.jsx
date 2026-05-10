@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { Trash2, Loader2, RefreshCw, Play, Pause } from 'lucide-react';
 import { updateJob, deleteJob, retryFailed } from '../api';
 
@@ -39,6 +39,23 @@ export default function FileRow({ job, index, selected, onSelect, onDelete, onCh
   const showSS = activePlatforms.includes('shutterstock');
   const showAS = activePlatforms.includes('adobe_stock');
 
+  // Create stable video URL using useMemo to prevent re-creation on every render
+  const videoUrl = useMemo(() => {
+    if (isVideo && job.fileObj) {
+      return URL.createObjectURL(job.fileObj);
+    }
+    return null;
+  }, [job.fileObj, isVideo]);
+
+  // Cleanup object URL when component unmounts or fileObj changes
+  useEffect(() => {
+    return () => {
+      if (videoUrl) {
+        URL.revokeObjectURL(videoUrl);
+      }
+    };
+  }, [videoUrl]);
+
   const patch = async (field, value) => {
     onChange(job.id, field, value);
     try { await updateJob(job.id, { [field]: value }); } catch {}
@@ -55,8 +72,22 @@ export default function FileRow({ job, index, selected, onSelect, onDelete, onCh
 
   const togglePlay = () => {
     if (!videoRef.current) return;
-    if (playing) { videoRef.current.pause(); setPlaying(false); }
-    else { videoRef.current.play(); setPlaying(true); }
+    
+    if (playing) { 
+      videoRef.current.pause(); 
+      setPlaying(false); 
+    } else { 
+      // Add promise handling for modern browsers
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setPlaying(true))
+          .catch(err => console.error('Play failed:', err));
+      } else {
+        // Fallback for older browsers
+        setPlaying(true);
+      }
+    }
   };
 
   const selectStyle = (value) => ({
@@ -112,11 +143,17 @@ export default function FileRow({ job, index, selected, onSelect, onDelete, onCh
           <div style={{ width:68, height:68, borderRadius:'var(--radius)', overflow:'hidden', background:'var(--bg-surface-3)', position:'relative', flexShrink:0, border:'1px solid var(--border)' }}>
             {isVideo ? (
               <>
-                <video ref={videoRef} src={URL.createObjectURL(job.fileObj || new Blob())}
-                  style={{ width:'100%', height:'100%', objectFit:'cover', display: job.fileObj ? 'block' : 'none' }}
-                  onEnded={() => setPlaying(false)} loop={false} muted={false}
-                />
-                {!job.fileObj && <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:22 }}>🎬</div>}
+                {videoUrl && (
+                  <video 
+                    ref={videoRef} 
+                    src={videoUrl}
+                    style={{ width:'100%', height:'100%', objectFit:'cover', display: 'block' }}
+                    onEnded={() => setPlaying(false)} 
+                    loop={false} 
+                    muted={false}
+                  />
+                )}
+                {!videoUrl && <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:22 }}>🎬</div>}
                 <div onClick={togglePlay} style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', background:'rgba(0,0,0,0.25)' }}>
                   <div style={{ width:22, height:22, background:'rgba(0,0,0,0.55)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>
                     {playing ? <Pause size={10} color="white"/> : <Play size={10} color="white"/>}

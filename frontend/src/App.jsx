@@ -202,7 +202,7 @@ export default function App() {
           </div>
           <div>
             <div style={{ fontSize:14, fontWeight:700, letterSpacing:'-0.3px', lineHeight:1.2 }}>
-              Shutterstock<span style={{ color:'var(--accent)' }}>_AI</span>
+              Litterate<span style={{ color:'var(--accent)' }}>Lamp</span>
             </div>
             <div style={{ fontSize:10, color:'var(--text-tertiary)', textTransform:'uppercase', letterSpacing:'0.05em', lineHeight:1.2 }}>Metadata Generator</div>
           </div>

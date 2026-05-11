@@ -39,27 +39,25 @@ sudo apt install ffmpeg
 
 ## Setup & Run
 
-### 1. Backend
+### 1. Python
 
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-```
+run (windows)
+setup-python.bat
 
-Backend runs at: http://localhost:8000
+run (linux)
+setup-python.sh
 
-### 2. Frontend (new terminal)
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+### 2. Start
+
+run (windows)
+start.bat
+
+run (linux)
+start.sh
 
 Frontend runs at: http://localhost:5173
-
----
+Backend runs at: http://localhost:8000
 
 ## Usage
 

@@ -1,6 +1,5 @@
-# Shutterstock AI Metadata Generator
 
-Auto-generate Shutterstock metadata (description, keywords, categories) using Google Gemini AI.
+Auto-generate metadata (description, keywords, categories) using Google Gemini AI.
 
 ## Features
 - 🖼️ Image & video support
@@ -81,33 +80,6 @@ When a key hits rate limit (429), the backend automatically:
 2. Switches to the next available key
 3. Auto-resets the key after ~65 seconds
 4. Shows live key status in the UI (green/yellow/red)
-
----
-
-## Project Structure
-
-```
-shutterstock-ai/
-├── backend/
-│   ├── main.py              # FastAPI app + routes
-│   ├── gemini_service.py    # Gemini API + key rolling
-│   ├── video_service.py     # FFmpeg frame extraction
-│   ├── queue_manager.py     # Job queue with start/pause/stop
-│   ├── config.py            # Models + categories config
-│   └── requirements.txt
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx
-│   │   ├── api/index.js     # Axios API calls
-│   │   └── components/
-│   │       ├── ApiKeyManager.jsx
-│   │       ├── ModelSelector.jsx
-│   │       ├── QueueControls.jsx
-│   │       └── FileRow.jsx
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
-```
 
 ---
 

@@ -6,7 +6,7 @@ Auto-generate metadata (description, keywords, categories) using Google Gemini A
 - Multiple Gemini models (2.5 Pro, 2.5 Flash, 2.5 Flash Lite, 2.0 Flash, 2.0 Flash Lite)
 - Multi API key with auto-rolling on rate limit
 - Start / Pause / Stop queue controls
-- Export CSV for Shutterstock bulk upload
+- Export CSV for bulk upload
 - FFmpeg-based video frame extraction
 
 ---

@@ -38,23 +38,31 @@ sudo apt install ffmpeg
 ---
 
 ## Setup & Run
-
+1. Run setup python
+2. Run Start
+   
 ### 1. Python
 
-run (windows)
+**Windows:**
+```
 setup-python.bat
+```
 
-run (linux)
+**Ubuntu/Debian:**
+```
 setup-python.sh
-
+```
 
 ### 2. Start
 
-run (windows)
+**Windows:**
+```
 start.bat
-
-run (linux)
+```
+**Ubuntu/Debian:**
+```
 start.sh
+```
 
 Frontend runs at: http://localhost:5173
 Backend runs at: http://localhost:8000

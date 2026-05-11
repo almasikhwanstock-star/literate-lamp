@@ -2,12 +2,12 @@
 Auto-generate metadata (description, keywords, categories) using Google Gemini AI.
 
 ## Features
-- 🖼️ Image & video support
-- 🤖 Multiple Gemini models (2.5 Pro, 2.5 Flash, 2.5 Flash Lite, 2.0 Flash, 2.0 Flash Lite)
-- 🔑 Multi API key with auto-rolling on rate limit
-- ⏯️ Start / Pause / Stop queue controls
-- 📋 Export CSV for Shutterstock bulk upload
-- 🎬 FFmpeg-based video frame extraction
+- Image & video support
+- Multiple Gemini models (2.5 Pro, 2.5 Flash, 2.5 Flash Lite, 2.0 Flash, 2.0 Flash Lite)
+- Multi API key with auto-rolling on rate limit
+- Start / Pause / Stop queue controls
+- Export CSV for Shutterstock bulk upload
+- FFmpeg-based video frame extraction
 
 ---
 

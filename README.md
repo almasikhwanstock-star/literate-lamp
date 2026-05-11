@@ -38,8 +38,8 @@ sudo apt install ffmpeg
 ---
 
 ## Setup & Run
-1. Run setup python
-2. Run Start
+1. Run setup-python
+2. Run start
    
 ### 1. Python
 

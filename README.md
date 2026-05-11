@@ -75,7 +75,8 @@ Backend runs at: http://localhost:8000
 4. Drag & drop images/videos onto the drop zone
 5. Click **START** to begin analysis
 6. Edit description/keywords/categories if needed
-7. Click **EXPORT CSV** to download for Shutterstock
+7. Click **EXPORT CSV** to download
+8. When there are any errors of shutterstock csv, just select none at shutterstock categories 
 
 ---
 
